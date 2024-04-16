@@ -1,20 +1,32 @@
-import { Component } from '@angular/core';
-import { ClickEvent } from 'devextreme/ui/button';
+import { Component, ViewEncapsulation } from '@angular/core';
+import DataSource from 'devextreme/data/data_source';
+import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+import { Service } from './app.service';
 
+declare var __moduleName: string;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  moduleId: __moduleName,
+  providers: [Service],
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class AppComponent {
-  title = 'Angular';
+  dataSource: DataSource;
 
-  counter = 0;
+  collapsed = false;
 
-  buttonText = 'Click count: 0';
+  contentReady = (e: DxDataGridTypes.ContentReadyEvent) => {
+    if (!this.collapsed) {
+      this.collapsed = true;
+      e.component.expandRow(['EnviroCare']);
+    }
+  };
 
-  onClick(e: ClickEvent): void {
-    this.counter++;
-    this.buttonText = `Click count: ${this.counter}`;
+  customizeTooltip = ({ originalValue }: Record<string, string>) => ({ text: `${parseInt(originalValue)}%` });
+
+  constructor(service: Service) {
+    this.dataSource = service.getDataSource();
   }
 }
