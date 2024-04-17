@@ -4,9 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const shadowHost = document.getElementById('root') as HTMLElement;
+const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+const root = ReactDOM.createRoot(shadowRoot);
+
 root.render(
   <React.StrictMode>
     <App />

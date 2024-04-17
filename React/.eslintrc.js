@@ -29,6 +29,10 @@ module.exports = {
         'forbidExtraProps',
       ],
     },
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'off',
+      'func-style': ['error', 'declaration', { 'allowArrowFunctions': true }],
+    }
   }, {
     files: ['*.test.tsx'],
     extends: ['devextreme/jest']
