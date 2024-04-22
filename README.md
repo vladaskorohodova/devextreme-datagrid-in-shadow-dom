@@ -10,7 +10,19 @@
 
 To attach a Shadow DOM tree, follow the instructions for each framework:
 
-- [Angular](https://angular.io/guide/view-encapsulation#shadow-dom-encapsulation)
+- [Angular](https://angular.io/guide/view-encapsulation#shadow-dom-encapsulation)    
+    ```
+    @Component({
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+        styleUrls: ['./app.component.scss'],
+        // ...
+        encapsulation: ViewEncapsulation.ShadowDom,
+    })
+    export class AppComponent {
+        // ...
+    }
+    ```
 
 - Vue    
     ```
